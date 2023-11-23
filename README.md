@@ -80,6 +80,7 @@ In this case we are seeing the amount of DAI that this wallet has on the Polygon
 3. Make some GET REQUEST to this endpoints
     - '/eth-balance'
     - '/erc20-balance'
+    
 Following the examples mentioned above
 
 # Resources
