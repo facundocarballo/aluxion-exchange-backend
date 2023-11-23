@@ -113,7 +113,7 @@ app.get("/eth-balance", async (req, res) => {
     const ethBalance = await GetETHBalance(rpc, address);
     res.send(ethBalance)
   } catch (err) {
-    res.status(404).send(`Check your arguments. ${err}`);
+    res.status(400).send(`Check your arguments. ${err}`);
   }
 })
 
@@ -130,7 +130,7 @@ app.get("/erc20-balance", async (req, res) => {
     const erc20Balance = await GetERC20Balance(rpc, address, contractAddress)
     res.send(erc20Balance)
   } catch (err) {
-    res.status(404).send(`Check your arguments. ${err}`);
+    res.status(400).send(`Check your arguments. ${err}`);
   }
 })
 
