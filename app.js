@@ -110,7 +110,7 @@ app.get("/eth-balance", async (req, res) => {
   }
 
   const ethBalance = await GetETHBalance(rpc, address);
-  res.send(`ETH Balance: ${ethBalance}`)
+  res.send(ethBalance)
 })
 
 app.get("/erc20-balance", async (req, res) => {
@@ -122,8 +122,8 @@ app.get("/erc20-balance", async (req, res) => {
       return res.status(400).send('address, rpc and contractAddress are needed as parameters.');
   }
 
-  const ethBalance = await GetERC20Balance(rpc, address, contractAddress)
-  res.send(`ERC20 Balance: ${ethBalance}`)
+  const erc20Balance = await GetERC20Balance(rpc, address, contractAddress)
+  res.send(erc20Balance)
 })
 
 app.use('/api/', routes)
