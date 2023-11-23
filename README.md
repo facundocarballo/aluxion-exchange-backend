@@ -11,6 +11,20 @@ This endpoint needs two arguments to work properly.
 
 This endpoint returns the balance in crypto of the wallet in the blockchain that the node is running on.
 
+### Example
+```bash
+    curl "http://localhost:8088/eth-balance?address=0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5&rpc=https://polygon-rpc.com"
+```
+
+##### Arguments used
+- address = 0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5
+- rpc = https://polygon-rpc.com
+
+> This have to returned something like this in your browser.
+![ETH Balance example with curl](https://i.ibb.co/Xppg04z/curl-request-eth-balance.png)
+![ETH Balance example](https://i.ibb.co/RPPttGk/ETH-BALANCE.png)
+In this case we are seeing the amount of MATIC that this wallet has.
+
 ---
 
 ## /erc20-balance
@@ -27,6 +41,22 @@ This endpoints needs three arguments to work properly.
 
 This endpoint returns the balance of the wallet in some ERC20 on the blockchain that the node is running on.
 
+### Example
+```bash
+    curl "http://localhost:8088/erc20-balance?address=0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5&rpc=https://polygon-rpc.com&contractAddress=0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063"
+```
+
+#### Arguments used
+- address = 0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5
+- rpc = https://polygon-rpc.com
+- contractAddress = 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063
+
+> This have to returned something like this in your browser.
+![ERC20 Balance example with curl](https://i.ibb.co/n3zm7qC/curl-request-erc20-balance.png)
+![ERC20 Balance example](https://i.ibb.co/t4vkmKN/erc20-balance.png)
+In this case we are seeing the amount of DAI that this wallet has on the Polygon Blockchain.
+
+
 ---
 
 ## How to use it?
@@ -41,34 +71,10 @@ This endpoint returns the balance of the wallet in some ERC20 on the blockchain 
 ```
 ![Server running](https://i.ibb.co/GTmbzzz/node-js-server-listening.png)
 
-### '/eth-balance' Example
-```bash
-    curl "http://localhost:8088/eth-balance?address=0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5&rpc=https://polygon-rpc.com"
-```
-
-#### Arguments used
-- address = 0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5
-- rpc = https://polygon-rpc.com
-
-> This have to returned something like this in your browser.
-![ETH Balance example with curl](https://i.ibb.co/Xppg04z/curl-request-eth-balance.png)
-![ETH Balance example](https://i.ibb.co/RPPttGk/ETH-BALANCE.png)
-In this case we are seeing the amount of MATIC that this wallet has.
-
-### '/erc20-balance'
-```bash
-    curl "http://localhost:8088/erc20-balance?address=0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5&rpc=https://polygon-rpc.com&contractAddress=0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063"
-```
-
-#### Arguments used
-- address = 0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5
-- rpc = https://polygon-rpc.com
-- contractAddress = 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063
-
-> This have to returned something like this in your browser.
-![ERC20 Balance example with curl](https://i.ibb.co/n3zm7qC/curl-request-erc20-balance.png)
-![ERC20 Balance example](https://i.ibb.co/t4vkmKN/erc20-balance.png)
-In this case we are seeing the amount of DAI that this wallet has on the Polygon Blockchain.
+3. Make some GET REQUEST to this endpoints
+    - '/eth-balance'
+    - '/erc20-balance'
+Following the examples mentioned above
 
 # Resources
 ## RPCs
