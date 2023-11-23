@@ -41,7 +41,7 @@ In this case we are seeing the amount of MATIC that this wallet has.
 
 > This have to returned something like this in your browser.
 
-![ETH Balance example with curl](https://i.ibb.co/Xppg04z/curl-request-eth-balance.png)
+![ETH Balance example with curl](https://i.ibb.co/VCPzY96/curl-eth-balance-real.png)
 
 ![ETH Balance example with postman](https://i.ibb.co/2nz5g3z/postman-eth-balance.png)
 
