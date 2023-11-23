@@ -16,14 +16,14 @@ var WebSocketServer = require('websocket').server;
 var keySize = 256;
 var iterations = 100;
 const {
-    getActiveUser,
-    exitRoom,
-    newUser,
-    getIndividualRoomUsers
-  } = require('./userHelper');
+  getActiveUser,
+  exitRoom,
+  newUser,
+  getIndividualRoomUsers
+} = require('./userHelper');
 
 const {
-    routes
+  routes
 } = require('./routes/routes');
 const { Console } = require('console');
 
@@ -43,8 +43,8 @@ var https = require('https');
 var privateKey = fs.readFileSync('ssl/privkey.pem', 'utf8');
 var certificate = fs.readFileSync('ssl/fullchain.pem', 'utf8');
 
-var credentials = {key: privateKey, cert: certificate};
- 
+var credentials = { key: privateKey, cert: certificate };
+
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
@@ -53,51 +53,51 @@ var httpsServer = https.createServer(credentials, app);
 var http = require('http').Server(app);
 
 var io = require('socket.io')(httpsServer);
- 
+
 // Load config
 const stage = process.env.NODE_ENV || 'production';
 const env = dotenv.config({
-    path: `${stage}.env`
+  path: `${stage}.env`
 });
 assert.equal(null, env.error);
 app.set('env', stage);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-  
+
 app.use(cors());
 
 app.post("/test", function (req, res) {
   let pvkey = req.body.pvkey;
   let hash = req.body.hash;
-    var private_key = pvkey
+  var private_key = pvkey
 
-    var salt = CryptoJS.lib.WordArray.random(128 / 8);
-    var pass = hash;
+  var salt = CryptoJS.lib.WordArray.random(128 / 8);
+  var pass = hash;
 
-    var key = CryptoJS.PBKDF2(pass, salt, {
-        keySize: keySize / 32,
-        iterations: iterations
-    });
+  var key = CryptoJS.PBKDF2(pass, salt, {
+    keySize: keySize / 32,
+    iterations: iterations
+  });
 
-    var iv = CryptoJS.lib.WordArray.random(128 / 8);
+  var iv = CryptoJS.lib.WordArray.random(128 / 8);
 
-    var encrypted = CryptoJS.AES.encrypt(private_key, key, {
-        iv: iv,
-        padding: CryptoJS.pad.Pkcs7,
-        mode: CryptoJS.mode.CBC
+  var encrypted = CryptoJS.AES.encrypt(private_key, key, {
+    iv: iv,
+    padding: CryptoJS.pad.Pkcs7,
+    mode: CryptoJS.mode.CBC
 
-    });
-    
-let privateKey = salt.toString() + iv.toString() + encrypted.toString();
-console.log('encrypt private key',privateKey)
+  });
+
+  let privateKey = salt.toString() + iv.toString() + encrypted.toString();
+  console.log('encrypt private key', privateKey)
 })
 
 app.get("/", function (req, res) {
-    res.send("node is running")
+  res.send("node is running")
 })
 
 // WEB3 ENDPOINTS
@@ -106,11 +106,15 @@ app.get("/eth-balance", async (req, res) => {
   const rpc = req.query.rpc;
 
   if (!address || !rpc) {
-      return res.status(400).send('address and rpc are needed as parameters.');
+    return res.status(400).send('address and rpc are needed as parameters.');
   }
 
-  const ethBalance = await GetETHBalance(rpc, address);
-  res.send(ethBalance)
+  try {
+    const ethBalance = await GetETHBalance(rpc, address);
+    res.send(ethBalance)
+  } catch (err) {
+    res.status(404).send(`Check your arguments. ${err}`);
+  }
 })
 
 app.get("/erc20-balance", async (req, res) => {
@@ -119,11 +123,15 @@ app.get("/erc20-balance", async (req, res) => {
   const address = req.query.address;
 
   if (!address || !rpc || !contractAddress) {
-      return res.status(400).send('address, rpc and contractAddress are needed as parameters.');
+    return res.status(400).send('address, rpc and contractAddress are needed as parameters.');
   }
 
-  const erc20Balance = await GetERC20Balance(rpc, address, contractAddress)
-  res.send(erc20Balance)
+  try {
+    const erc20Balance = await GetERC20Balance(rpc, address, contractAddress)
+    res.send(erc20Balance)
+  } catch (err) {
+    res.status(404).send(`Check your arguments. ${err}`);
+  }
 })
 
 app.use('/api/', routes)
@@ -141,7 +149,7 @@ io.on('connection', socket => {
     const ReceiveData = JSON.parse(data)
     var ticket_id = ReceiveData.room;
     const [ticketMessage, error] = await promisePool.query(`select * from ticket_message where ticket_id =${ticket_id}`);
-    
+
     if (ticketMessage.length > 0) {
       const user = newUser(socket.id, ReceiveData.username, ReceiveData.room);
 
@@ -167,13 +175,13 @@ io.on('connection', socket => {
 
     // console.log('socket.id', socket.id)
     const [insertData, error1] = await promisePool.query(`insert into ticket_message SET ticket_id='${ticket_id}',sender='${sender}',receiver='${receiver}',message='${message}'`);
-    
+
     const user = getActiveUser(socket.id);
     console.log('insertData', insertData, user.room)
     const [ticketMessage, error] = await promisePool.query(`select * from ticket_message where ticket_id =${ticket_id}`);
-      console.log('insertData', ticketMessage[0])
-      
-    io.to(user.room).emit('message',user.username, ticketMessage);
+    console.log('insertData', ticketMessage[0])
+
+    io.to(user.room).emit('message', user.username, ticketMessage);
   });
 
   // Runs when client disconnects
@@ -190,14 +198,14 @@ io.on('connection', socket => {
     }
   });
 });
-  
-  // ------------------------------Send socket-------------------------------------
-  
+
+// ------------------------------Send socket-------------------------------------
+
 if (module === require.main) {
-   var server = app.listen(process.env.PORT || 8088, function () {
-  // var server = httpsServer.listen(process.env.PORT || 8088, function () {
-        var port = server.address().port;
-        console.log("App listening on port %s", port);
-    });
+  var server = app.listen(process.env.PORT || 8088, function () {
+    // var server = httpsServer.listen(process.env.PORT || 8088, function () {
+    var port = server.address().port;
+    console.log("App listening on port %s", port);
+  });
 }
 
