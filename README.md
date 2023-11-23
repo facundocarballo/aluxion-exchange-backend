@@ -11,7 +11,7 @@ This endpoint needs two arguments to work properly.
 
 This endpoint returns the balance in crypto of the wallet in the blockchain that the node is running on.
 
-### Example
+### MATIC Example
 ```bash
     curl "http://localhost:8088/eth-balance?address=0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5&rpc=https://polygon-rpc.com"
 ```
@@ -22,11 +22,30 @@ This endpoint returns the balance in crypto of the wallet in the blockchain that
 
 > This have to returned something like this in your browser.
 
-![ETH Balance example with curl](https://i.ibb.co/Xppg04z/curl-request-eth-balance.png)
+![MATIC Balance example with curl](https://i.ibb.co/6bVWnT5/curl-matic-balance.png)
 
-![ETH Balance example](https://i.ibb.co/RPPttGk/ETH-BALANCE.png)
+![MATIC Balance example with postman](https://i.ibb.co/9rJc9Z5/postman-matic-balance.png)
+
+![MATIC Balance example browser](https://i.ibb.co/pw15DLm/browser-matic-balance.png)
 
 In this case we are seeing the amount of MATIC that this wallet has.
+
+### ETH Example
+```bash
+    curl "http://localhost:8088/eth-balance?address=0xF977814e90dA44bFA03b6295A0616a897441aceC&rpc=https://eth.llamarpc.com"
+```
+
+#### Arguments used
+- address = 0xF977814e90dA44bFA03b6295A0616a897441aceC
+- rpc = https://eth.llamarpc.com
+
+> This have to returned something like this in your browser.
+
+![ETH Balance example with curl](https://i.ibb.co/Xppg04z/curl-request-eth-balance.png)
+
+![ETH Balance example with postman](https://i.ibb.co/2nz5g3z/postman-eth-balance.png)
+
+In this case we are seeing the amount of ETH that this wallet has.
 
 ---
 
@@ -44,7 +63,7 @@ This endpoints needs three arguments to work properly.
 
 This endpoint returns the balance of the wallet in some ERC20 on the blockchain that the node is running on.
 
-### Example
+### DAI on Polygon Example
 ```bash
     curl "http://localhost:8088/erc20-balance?address=0x9060723c22dE586c2fA5eFa07A7743F6f4a935f5&rpc=https://polygon-rpc.com&contractAddress=0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063"
 ```
@@ -56,12 +75,31 @@ This endpoint returns the balance of the wallet in some ERC20 on the blockchain 
 
 > This have to returned something like this in your browser.
 
-![ERC20 Balance example with curl](https://i.ibb.co/n3zm7qC/curl-request-erc20-balance.png)
+![DAI Balance example with curl](https://i.ibb.co/QQMFcTb/curl-dai-polygon-balance.png)
 
-![ERC20 Balance example](https://i.ibb.co/t4vkmKN/erc20-balance.png)
+![DAI Balance example with postman](https://i.ibb.co/LYJpGRT/postman-dai-balance.png)
+
+![DAI Balance example with browser](https://i.ibb.co/fpsh6Vm/browser-dai-balance.png)
 
 In this case we are seeing the amount of DAI that this wallet has on the Polygon Blockchain.
 
+### BUSD on Binance Smart Chain Example
+```bash
+    curl "http://localhost:8088/erc20-balance?address=0xF977814e90dA44bFA03b6295A0616a897441aceC&rpc=https://binance.llamarpc.com&contractAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
+```
+
+#### Arguments used
+- address = 0xF977814e90dA44bFA03b6295A0616a897441aceC
+- rpc = https://binance.llamarpc.com
+- contractAddress = 0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56
+
+> This have to returned something like this in your browser.
+
+![BUSD Balance example with curl](https://i.ibb.co/hMNXgCt/curl-busd-balance.png)
+
+![BUSD Balance example with postman](https://i.ibb.co/0f1jSbZ/postman-busd-balance.png)
+
+In this case we are seeing the amount of BUSD that this wallet has on the Binance Smart Chain.
 
 ---
 
