@@ -1,7 +1,7 @@
 # silky_exchange_backend
 
 ## /eth-balance
-This endpoint needs two arguments to work propertly.
+This endpoint needs two arguments to work properly.
 
 - rpc
 > URL to connect with a particular node of a specific blockchain.
@@ -14,7 +14,7 @@ This endpoint returns the balance in crypto of the wallet in the blockchain that
 ---
 
 ## /erc20-balance
-This endpoints needs three arguments to work propertly.
+This endpoints needs three arguments to work properly.
 
 - rpc
 > URL to connect with a particular node of a specific blockchain.
